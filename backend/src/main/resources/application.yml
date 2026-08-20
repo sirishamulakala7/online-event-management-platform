@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: event-management-backend
+
+  profiles:
+    active: dev
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# JWT configuration (override per profile)
+jwt:
+  secret: ${JWT_SECRET:change-me-in-production}
+  expiration-ms: 86400000       # 24 hours
+  refresh-expiration-ms: 604800000  # 7 days
+
+# WebSocket configuration
+websocket:
+  allowed-origins: http://localhost:5173
