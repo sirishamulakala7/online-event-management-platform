@@ -24,6 +24,17 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<Map<String, Object>> handleConflict(ConflictException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(Map.of(
+                        "timestamp", LocalDateTime.now().toString(),
+                        "message", ex.getMessage(),
+                        "status", 409
+                ));
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity
