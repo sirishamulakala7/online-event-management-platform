@@ -1,9 +1,12 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from '@/providers/AuthProvider'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
-import HomePage from '@/pages/HomePage'
+import EventsPage from '@/pages/EventsPage'
+import EventDetailPage from '@/pages/EventDetailPage'
+import CreateEventPage from '@/pages/CreateEventPage'
+import EditEventPage from '@/pages/EditEventPage'
 import NotFound from '@/pages/NotFound'
 
 function App() {
@@ -16,13 +19,40 @@ function App() {
 
         {/* Protected routes */}
         <Route
-          path="/"
+          path="/events"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <EventsPage />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/events/new"
+          element={
+            <ProtectedRoute>
+              <CreateEventPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/events/:id"
+          element={
+            <ProtectedRoute>
+              <EventDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/events/:id/edit"
+          element={
+            <ProtectedRoute>
+              <EditEventPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Redirect root to events */}
+        <Route path="/" element={<Navigate to="/events" replace />} />
 
         {/* Catch-all */}
         <Route path="*" element={<NotFound />} />

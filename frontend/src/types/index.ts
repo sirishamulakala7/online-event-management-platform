@@ -24,8 +24,21 @@ export interface Event {
   endDate: string
   maxAttendees: number
   organizerId: number
+  organizerName: string
   status: EventStatus
   createdAt: string
+  updatedAt: string
+}
+
+export interface EventRequest {
+  title: string
+  description?: string
+  location?: string
+  startDate: string
+  endDate: string
+  maxAttendees?: number
+  organizerId: number
+  status?: EventStatus
 }
 
 export enum EventStatus {
