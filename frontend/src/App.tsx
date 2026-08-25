@@ -7,6 +7,7 @@ import EventsPage from '@/pages/EventsPage'
 import EventDetailPage from '@/pages/EventDetailPage'
 import CreateEventPage from '@/pages/CreateEventPage'
 import EditEventPage from '@/pages/EditEventPage'
+import MyRegistrationsPage from '@/pages/MyRegistrationsPage'
 import NotFound from '@/pages/NotFound'
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditEventPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-registrations"
+          element={
+            <ProtectedRoute>
+              <MyRegistrationsPage />
             </ProtectedRoute>
           }
         />

@@ -71,11 +71,16 @@ export default function EventsPage() {
     <div className="app">
       <div className="page-header">
         <h1>Events</h1>
-        {user && CAN_CREATE.includes(user.role) && (
-          <Link to="/events/new" className="btn btn-primary btn-inline">
-            + New Event
+        <div className="page-header-actions">
+          <Link to="/my-registrations" className="btn btn-secondary btn-inline">
+            My Registrations
           </Link>
-        )}
+          {user && CAN_CREATE.includes(user.role) && (
+            <Link to="/events/new" className="btn btn-primary btn-inline">
+              + New Event
+            </Link>
+          )}
+        </div>
       </div>
 
       {events.length === 0 ? (

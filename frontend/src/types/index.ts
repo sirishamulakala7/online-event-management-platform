@@ -58,3 +58,18 @@ export interface ApiResponse<T> {
   data: T
   message?: string
 }
+
+export enum RegistrationStatus {
+  CONFIRMED = 'CONFIRMED',
+  CANCELLED = 'CANCELLED',
+}
+
+export interface Registration {
+  id: number
+  userId: number
+  userName: string
+  eventId: number
+  eventTitle: string
+  status: RegistrationStatus
+  registeredAt: string
+}
