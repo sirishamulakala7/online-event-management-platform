@@ -1,6 +1,11 @@
 package com.eventmanagement.controller;
 
 import com.eventmanagement.dto.AuthResponse;
+import com.eventmanagement.dto.LoginRequest;
+import com.eventmanagement.dto.RegisterRequest;
+import com.eventmanagement.service.AuthService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,21 +13,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register() {
-        // TODO: implement registration
-        return ResponseEntity.ok(AuthResponse.builder().build());
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        AuthResponse response = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login() {
-        // TODO: implement login
-        return ResponseEntity.ok(AuthResponse.builder().build());
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh() {
-        // TODO: implement token refresh
-        return ResponseEntity.ok(AuthResponse.builder().build());
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }
