@@ -84,6 +84,11 @@ public class RegistrationService {
                 .toList();
     }
 
+    public Registration getRegistrationById(Long id) {
+        return registrationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Registration", "id", id));
+    }
+
     public void cancel(Long id) {
         Registration registration = registrationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Registration", "id", id));

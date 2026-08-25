@@ -3,6 +3,7 @@ package com.eventmanagement.config;
 import com.eventmanagement.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -33,10 +34,22 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // Auth endpoints - fully public
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/events/**").permitAll()
-                        .requestMatchers("/registrations/**").permitAll()
+
+                        // WebSocket
                         .requestMatchers("/ws/**").permitAll()
+
+                        // Events - public read, write requires ADMIN or ORGANIZER
+                        .requestMatchers(HttpMethod.GET, "/events/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/events/**").hasAnyRole("ADMIN", "ORGANIZER")
+                        .requestMatchers(HttpMethod.PUT, "/events/**").hasAnyRole("ADMIN", "ORGANIZER")
+                        .requestMatchers(HttpMethod.DELETE, "/events/**").hasAnyRole("ADMIN", "ORGANIZER")
+
+                        // Registrations - all require authentication
+                        .requestMatchers("/registrations/**").authenticated()
+
+                        // Everything else requires authentication
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

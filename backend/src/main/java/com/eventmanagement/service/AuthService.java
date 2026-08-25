@@ -46,12 +46,7 @@ public class AuthService {
 
         User saved = userRepository.save(user);
 
-        String token = jwtTokenProvider.generateAccessToken(saved.getEmail());
-
-        return AuthResponse.builder()
-                .accessToken(token)
-                .user(userService.mapToDTO(saved))
-                .build();
+        return buildAuthResponse(saved.getEmail());
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -62,10 +57,29 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        String token = jwtTokenProvider.generateAccessToken(user.getEmail());
+        return buildAuthResponse(user.getEmail());
+    }
+
+    public AuthResponse refresh(String refreshToken) {
+        if (!jwtTokenProvider.validateToken(refreshToken)) {
+            throw new IllegalArgumentException("Invalid or expired refresh token");
+        }
+
+        String email = jwtTokenProvider.getEmailFromToken(refreshToken);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return buildAuthResponse(user.getEmail());
+    }
+
+    private AuthResponse buildAuthResponse(String email) {
+        String accessToken = jwtTokenProvider.generateAccessToken(email);
+        String refreshToken = jwtTokenProvider.generateRefreshToken(email);
+        User user = userRepository.findByEmail(email).orElseThrow();
 
         return AuthResponse.builder()
-                .accessToken(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .user(userService.mapToDTO(user))
                 .build();
     }

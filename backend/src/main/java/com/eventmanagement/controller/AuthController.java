@@ -2,6 +2,7 @@ package com.eventmanagement.controller;
 
 import com.eventmanagement.dto.AuthResponse;
 import com.eventmanagement.dto.LoginRequest;
+import com.eventmanagement.dto.RefreshTokenRequest;
 import com.eventmanagement.dto.RegisterRequest;
 import com.eventmanagement.service.AuthService;
 import jakarta.validation.Valid;
@@ -28,5 +29,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(@Valid @RequestBody RefreshTokenRequest request) {
+        return ResponseEntity.ok(authService.refresh(request.getRefreshToken()));
     }
 }
