@@ -73,3 +73,12 @@ export interface Registration {
   status: RegistrationStatus
   registeredAt: string
 }
+
+export interface ChatMessage {
+  id: number
+  eventId: number
+  senderId: number
+  senderName: string
+  content: string
+  sentAt: string
+}

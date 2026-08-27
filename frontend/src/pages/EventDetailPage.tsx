@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { eventsApi, registrationsApi } from '@/api'
 import { useAuthContext } from '@/context/AuthContext'
+import ChatPanel from '@/components/ChatPanel'
 import type { Event, Registration } from '@/types'
 import { EventStatus } from '@/types'
 
@@ -242,6 +243,13 @@ export default function EventDetailPage() {
                 </button>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Chat panel */}
+        {user && (
+          <div className="chat-section">
+            <ChatPanel eventId={event.id} />
           </div>
         )}
       </div>
