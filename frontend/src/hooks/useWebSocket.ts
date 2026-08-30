@@ -21,7 +21,8 @@ export function useWebSocket({ eventId, enabled = true }: UseWebSocketOptions) {
     const token = localStorage.getItem('accessToken')
 
     const client = new Client({
-      webSocketFactory: () => new SockJS(`/api/ws?token=${token ?? ''}`),
+      webSocketFactory: () => new SockJS('/api/ws'),
+      connectHeaders: token ? { Authorization: `Bearer ${token}` } : {},
       reconnectDelay: 5000,
       heartbeatIncoming: 10000,
       heartbeatOutgoing: 10000,

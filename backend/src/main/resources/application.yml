@@ -17,7 +17,7 @@ server:
 
 # JWT configuration (override per profile)
 jwt:
-  secret: ${JWT_SECRET:change-me-in-production}
+  secret: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWZvci1sb2NhbC1kZXZlbG9wbWVudA==}
   expiration-ms: 86400000       # 24 hours
   refresh-expiration-ms: 604800000  # 7 days
 
