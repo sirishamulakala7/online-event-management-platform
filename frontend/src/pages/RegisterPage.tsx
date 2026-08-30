@@ -48,7 +48,7 @@ export default function RegisterPage() {
         <h1>Create account</h1>
         <p className="auth-subtitle">Join Event Management</p>
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && <div className="alert-error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

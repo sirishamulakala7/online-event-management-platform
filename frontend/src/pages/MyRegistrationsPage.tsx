@@ -76,7 +76,7 @@ export default function MyRegistrationsPage() {
   if (error) {
     return (
       <div className="app">
-        <div className="auth-error">{error}</div>
+        <div className="alert-error">{error}</div>
       </div>
     )
   }
@@ -85,7 +85,7 @@ export default function MyRegistrationsPage() {
     <div className="app">
       <div className="page-header">
         <h1>My Registrations</h1>
-        <Link to="/events" className="btn btn-secondary btn-inline">
+        <Link to="/events" className="btn btn-secondary">
           Browse Events
         </Link>
       </div>
@@ -93,7 +93,7 @@ export default function MyRegistrationsPage() {
       {registrations.length === 0 ? (
         <div className="empty-state-card">
           <p className="empty-state">You haven&apos;t registered for any events yet.</p>
-          <Link to="/events" className="btn btn-primary btn-inline" style={{ marginTop: '0.5rem' }}>
+          <Link to="/events" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
             Find Events
           </Link>
         </div>

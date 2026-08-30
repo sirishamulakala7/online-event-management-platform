@@ -137,7 +137,7 @@ export default function EventDetailPage() {
   if (error || !event) {
     return (
       <div className="app">
-        <div className="auth-error">{error ?? 'Event not found.'}</div>
+        <div className="alert-error">{error ?? 'Event not found.'}</div>
         <Link to="/events" className="btn btn-secondary" style={{ marginTop: '1rem' }}>
           ← Back to events
         </Link>
@@ -213,7 +213,7 @@ export default function EventDetailPage() {
         {/* Registration section */}
         {!canEdit && user && (
           <div className="registration-section">
-            {regError && <div className="auth-error">{regError}</div>}
+            {regError && <div className="alert-error">{regError}</div>}
             {regSuccess && <div className="reg-success">{regSuccess}</div>}
 
             {isEventClosed && !myRegistration && (

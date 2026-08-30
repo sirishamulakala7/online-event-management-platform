@@ -51,7 +51,7 @@ export default function EditEventPage() {
   if (error || !event) {
     return (
       <div className="app">
-        <div className="auth-error">{error ?? 'Event not found.'}</div>
+        <div className="alert-error">{error ?? 'Event not found.'}</div>
         <Link to="/events" className="btn btn-secondary" style={{ marginTop: '1rem' }}>
           ← Back to events
         </Link>
@@ -64,7 +64,7 @@ export default function EditEventPage() {
   if (!canEdit) {
     return (
       <div className="app">
-        <div className="auth-error">You don&apos;t have permission to edit this event.</div>
+        <div className="alert-error">You don&apos;t have permission to edit this event.</div>
         <Link to={`/events/${id}`} className="btn btn-secondary" style={{ marginTop: '1rem' }}>
           ← Back to event
         </Link>

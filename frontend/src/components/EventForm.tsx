@@ -77,7 +77,7 @@ export default function EventForm({ initialValues, onSubmit, submitLabel }: Even
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <div className="auth-error">{error}</div>}
+      {error && <div className="alert-error">{error}</div>}
 
       <div className="form-group">
         <label htmlFor="title">Title *</label>

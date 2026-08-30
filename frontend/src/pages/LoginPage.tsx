@@ -38,7 +38,7 @@ export default function LoginPage() {
         <h1>Sign in</h1>
         <p className="auth-subtitle">Welcome back to Event Management</p>
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && <div className="alert-error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

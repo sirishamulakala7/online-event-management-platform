@@ -62,7 +62,7 @@ export default function EventsPage() {
   if (error) {
     return (
       <div className="app">
-        <div className="auth-error">{error}</div>
+        <div className="alert-error">{error}</div>
       </div>
     )
   }
@@ -72,11 +72,11 @@ export default function EventsPage() {
       <div className="page-header">
         <h1>Events</h1>
         <div className="page-header-actions">
-          <Link to="/my-registrations" className="btn btn-secondary btn-inline">
+          <Link to="/my-registrations" className="btn btn-secondary">
             My Registrations
           </Link>
           {user && CAN_CREATE.includes(user.role) && (
-            <Link to="/events/new" className="btn btn-primary btn-inline">
+            <Link to="/events/new" className="btn btn-primary">
               + New Event
             </Link>
           )}

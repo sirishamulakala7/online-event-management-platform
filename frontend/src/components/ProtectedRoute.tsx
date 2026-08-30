@@ -15,8 +15,8 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (isLoading) {
     return (
-      <div className="app" style={{ textAlign: 'center', paddingTop: '4rem' }}>
-        <p>Loading…</p>
+      <div className="app">
+        <p className="loading-text">Loading…</p>
       </div>
     )
   }
